@@ -1,13 +1,21 @@
 import React from "react";
 import axios from 'axios';
+import Unmatched from '../src/Unmatched'
 class UploadRes extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            unmatchedData:{},
+        }
+
+    }
     getMatches(){
         let url = "https://fierce-beyond-91184.herokuapp.com/api/matches";
 
         axios.get(url)
             .then(res => { // then print response status
                 this.setState({
-                    resData: res.data,
+                    unmatchedData: res.data,
                 })
                 console.warn(res);
             }).catch(error => {
@@ -18,7 +26,7 @@ class UploadRes extends React.Component {
     render() {
         // console.log(this.data)
         return(
-
+            <div>
             <div className="panel panel-default">
 
                 <div className="panel-heading  text-center panel-relative">RESULTS</div>
@@ -84,6 +92,10 @@ class UploadRes extends React.Component {
                     </div>
                     <br/>
                 </div>
+            </div>
+        {/*Unmatched Report*/}
+                {Object.keys(this.state.unmatchedData).length>0?(
+                    <Unmatched unmatched = {this.state.unmatchedData}/>):(<div></div>)}
             </div>
         )
     }
