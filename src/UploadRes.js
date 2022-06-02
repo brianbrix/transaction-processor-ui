@@ -47,7 +47,7 @@ class UploadRes extends React.Component {
                             </div>
                             <div className="form-row">
                                 <div className="form-group col-md-6">
-                                    <b>Matching Records</b>:<label>{this.props.resData.file1.matchingRecords}</label>
+                                    <b>Matched Records</b>:<label>{this.props.resData.file1.matchingRecords}</label>
                                 </div>
                             </div>
                             <div className="form-row">
