@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import {useState} from "react";
+import UploadRes from "../src/UploadRes"
 class FileUpload extends React.Component{
 
     constructor(){
@@ -8,11 +9,14 @@ class FileUpload extends React.Component{
         this.state = {
             selectedFile:'',
             selectedFile2:'',
+            resData:{},
         }
+
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleInputChange2 = this.handleInputChange2.bind(this);
     }
+
 
     handleInputChange(event) {
         console.log(event.target.files[0])
@@ -39,17 +43,27 @@ class FileUpload extends React.Component{
         axios.post(url, data, { // receive two parameter endpoint url ,form data
         })
             .then(res => { // then print response status
+                this.setState({
+                    resData: res.data,
+                })
                 console.warn(res);
-            })
+            }).catch(error => {
+                console.log(error)
+        })
 
     }
 
     render(){
+        // const resD = this.state.resData;
+        // this.setState({
+        //     resData: {}
+        // })
+        console.log("LEN" +Object.keys(this.state.resData).length)
         return(
             <div className="container" style={{border: '1px solid #cecece', marginTop: '30px', marginBottom:'30px'}}>
             <div className="panel-group">
                 <div className="panel panel-default">
-                    <div className="panel-heading">UPLOAD FILES</div>
+                    <div className="panel-heading text-center panel-relative">UPLOAD FILES</div>
                     <div className="panel-body">
                 <div className="row">
                     <div className="col-md-6">
@@ -84,8 +98,10 @@ class FileUpload extends React.Component{
                 </div>
                 </div>
                 </div>
-                <div className="panel panel-default">
 
+                <div className="panel panel-default">
+                    {Object.keys(this.state.resData).length>0?
+                        (<UploadRes resData = {this.state.resData} file1={this.state.selectedFile.name} file2={this.state.selectedFile2.name} />):(<div></div>)}
                 </div>
             </div>
             </div>
