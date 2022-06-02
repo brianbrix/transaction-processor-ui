@@ -94,6 +94,7 @@ class UploadRes extends React.Component {
                 </div>
             </div>
         {/*Unmatched Report*/}
+
                 {Object.keys(this.state.unmatchedData).length>0?(
                     <Unmatched unmatched = {this.state.unmatchedData}/>):(<div></div>)}
             </div>

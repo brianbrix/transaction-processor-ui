@@ -1,7 +1,22 @@
 import React from "react";
 import axios from 'axios';
 class Unmatched extends React.Component {
+    constructor() {
+        super();
+
+    }
 render() {
+        const tranArr = new Array();
+        const tranArr2 = new Array();
+        for (let i=0; i<this.props.unmatched.completeFails.length;i++)
+        {
+            tranArr.push([this.props.unmatched.completeFails[i].transaction.transactionId,this.props.unmatched.completeFails[i].transaction.transactionDate,this.props.unmatched.completeFails[i].transaction.transactionAmount,
+                this.props.unmatched.completeFails[i].transaction.transactionNarrative])
+            tranArr2.push([this.props.unmatched.completeFails[i].transaction2.transactionId,this.props.unmatched.completeFails[i].transaction2.transactionDate,this.props.unmatched.completeFails[i].transaction2.transactionAmount,
+                this.props.unmatched.completeFails[i].transaction2.transactionNarrative])
+        }
+
+
     return(
         <div className="panel panel-default">
 
@@ -10,34 +25,47 @@ render() {
             <div className="panel-body">
                 <div className="row">
                     <div className="col-md-6">
-
-                        <table>
+                        <div className="container">
+                            <h2>File 1</h2>
+                        <table className="table">
+                            <thead>
                             <tr>
-                                {this.props.unmatched.completeFails.transaction.map(column => <th>{column.data}</th>)}
+                                <th>Transaction ID</th>
+                                <th>Transaction Date</th>
+                                <th>Amount</th>
+                                <th>Narrative</th>
                             </tr>
+                            </thead>
+                            <tbody>
+                            { tranArr.map(row => <tr>{ row.map(cell => <td>{ cell }</td>) }</tr>) }
+                            </tbody>
+
                         </table>
 
+
+
+                    </div>
                     </div>
                     <hr/>
                     <div className="col-md-6">
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                                <h4>{this.props.file2}</h4>
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                            </div>
-                        </div>
-                        <div className="form-row">
-                            <div className="form-group col-md-6">
-                            </div>
-                        </div>
+                        <div className="container">
+                            <h2>File 2</h2>
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Transaction Date</th>
+                                <th>Amount</th>
+                                <th>Narrative</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
+                            { tranArr.map(row => <tr>{ row.map(cell => <td>{ cell }</td>) }</tr>) }
+                            </tbody>
+
+                        </table>
+                    </div>
                     </div>
                     <br/>
 
